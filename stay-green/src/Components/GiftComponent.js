@@ -4,17 +4,22 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 import CardContent from '@material-ui/core/CardContent';
 import { makeStyles } from '@material-ui/core/styles';
+import CardHeader from '@material-ui/core/CardHeader';
 
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        maxWidth: 345,
+        display: 'flex',
     },
-    media: {
-        height: 0,
-        paddingTop: '56.25%', // 16:9
+    details: {
+        display: 'flex',
+        flexDirection: 'column',
     },
 
+    cover: {
+        width: 300,
+        height: 200
+    },
 }));
 
 export default function GiftComponent(props) {
@@ -23,15 +28,15 @@ export default function GiftComponent(props) {
 
     return (
         <div>
-            <h1>Hello</h1>
             <Card className={classes.root}>
                 <CardMedia
-                    image={props.link}
+                    className={classes.cover}
+                    image={props.image}
                     title={props.name}
                 />
-                <CardContent>
+                <CardContent className={classes.content}>
                     <Typography variant="body2" color="textSecondary" component="p">
-                        {props.Description}
+                        {props.description}
                     </Typography>
                 </CardContent>
             </Card>

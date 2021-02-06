@@ -23,3 +23,12 @@ class Service:
 
         res = {'num': len(gifts_list), 'gifts': gifts_list}
         return response(200, res)
+
+    def like_gift(self, id, liked):
+        return response(200, Gift.like_gift(id, liked))
+
+    def get_liked_gifts(self):
+        gifts = Gift.get_liked_gifts()
+        gifts_list = [gift.to_dict() for gift in gifts]
+        res = {'num': len(gifts_list), 'gifts': gifts_list}
+        return response(200, res)

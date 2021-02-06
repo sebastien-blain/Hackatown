@@ -49,5 +49,9 @@ class Gift(DynamicDocument):
         gifts = Gift.objects(Liked=True)
         return gifts
 
+    @staticmethod
+    def like_gift(id, liked):
+        return Gift.objects(id=id).update(set__Liked=liked)
+
     def to_dict(self):
         return mongo_to_dict(self, [])

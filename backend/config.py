@@ -8,7 +8,7 @@ defaults = {
     'secret_key': os.getenv('SECRET_KEY', 'Real Secret Key'),
     'database': {
         'db_name': os.getenv('MONGO_NAME', 'hackatown'),
-        'uri': os.getenv('MONGO_URI', ''),
+        'uri': os.getenv('MONGO_URI', 'mongodb+srv://admin:admin@hackatown.rxpdo.mongodb.net/hackatown?retryWrites=true&w=majority'),
     }
 }
 

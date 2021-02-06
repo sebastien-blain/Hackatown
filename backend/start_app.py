@@ -2,6 +2,7 @@ from flask import Flask
 from flask_cors import CORS
 from middlewares.error_handler import ErrorHandler
 from middlewares.logger_handler import add_logger
+from helpers.mongo.mongo_setup import db_connection
 from api.controllers.user_controller import user_routes
 from config import config
 

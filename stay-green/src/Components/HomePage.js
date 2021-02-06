@@ -3,7 +3,7 @@ import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
 import { Grid, Input, InputBase } from '@material-ui/core';
-
+import Slide from './Carousel'
 //Interest event tracking
 export default function HomePage() {
     const [state, setState] = React.useState({
@@ -94,6 +94,7 @@ export default function HomePage() {
                     </FormGroup>
                 </Grid>
             </Grid>
+            <Slide></Slide>
         </div>
     );
 }

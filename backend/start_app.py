@@ -30,6 +30,7 @@ def create_app(application_name: str, middlewares=None):
     return app
 
 
+app = create_app('hackatown')
+
 if __name__ == '__main__':
-    app = create_app('hackatown')
     app.run(debug=config['debug'], host=config['host'])

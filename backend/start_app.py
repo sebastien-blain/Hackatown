@@ -3,7 +3,7 @@ from flask_cors import CORS
 from middlewares.error_handler import ErrorHandler
 from middlewares.logger_handler import add_logger
 from helpers.mongo.mongo_setup import db_connection
-from api.controllers.user_controller import user_routes
+from api.controllers.gift_controller import gift_routes
 from config import config
 
 
@@ -20,7 +20,7 @@ def create_app(application_name: str, middlewares=None):
 
     app.url_map.strict_slashes = False
 
-    app.register_blueprint(user_routes, url_prefix='/users')
+    app.register_blueprint(gift_routes, url_prefix='/gifts')
 
     @app.route('/')
     def root():

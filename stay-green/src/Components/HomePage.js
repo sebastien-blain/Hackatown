@@ -88,27 +88,82 @@ export default function HomePage() {
     const [price, setPrice] = useState(0);
     const [keys, setKeys] = useState(true);
     const [state, setState] = React.useState({
-        checkedTech: false,
-        checkedClothes: false,
-        checkedCare: false,
-        checkedHousehold: false,
-        checkedToy: false,
-        checkedOther: false,
-        checkedMom: false,
-        checkedDad: false,
-        checkedGirlfriend: false,
-        checkedBoyfriend: false,
-        checkedFriend: false,
-        checkedSibling: false
+        Tech: false,
+        Clothes: false,
+        Care: false,
+        Household: false,
+        Toy: false,
+        Other: false,
+        Mom: false,
+        Dad: false,
+        Girlfriend: false,
+        Boyfriend: false,
+        Friend: false,
+        Sibling: false
     });
 
     const handleChange = (event) => {
         setState({ ...state, [event.target.name]: event.target.checked });
     };
 
+    const getCheckedTypes = (state) => {
+        let eventList = [];
+        if (state.Tech) {
+            eventList.push('Tech');
+        }
+        if (state.Clothes) {
+            eventList.push('Clothes');
+        }
+        if (state.Care) {
+            eventList.push('Care');
+        }
+        if (state.Household) {
+            eventList.push('Household');
+        }
+        if (state.Toy) {
+            eventList.push('Toy');
+        }
+        if (state.Other) {
+            eventList.push('Other');
+        }
+        console.log(eventList);
+
+        return eventList;
+    }
+
+    const getCheckedTags = (state) => {
+        let eventList = [];
+
+        if (state.Mom) {
+            eventList.push('Women');
+            eventList.push('Kids');
+            eventList.push('Babies');
+        }
+        if (state.Dad) {
+            eventList.push('Men');
+            eventList.push('Kids');
+            eventList.push('Babies');
+        }
+        if (state.Girlfriend) {
+            eventList.push('Women');
+        }
+        if (state.Boyfriend) {
+            eventList.push('Men');
+        }
+        if (state.Friend) {
+            eventList.push('Women');
+            eventList.push('Men');
+            eventList.push('Teens');
+        }
+        console.log(eventList);
+        return eventList;
+    }
+
+
+
     const checkPrice = (value) => {
         console.log(value)
-        let patt = new RegExp("^(?=.+)(?:[1-9]*|0)?(?:\.\d+)?$");
+        let patt = new RegExp("^(?=.+)(?:[0-9]*|0)?(?:\.\d+)?$");
 
         if (patt.test(value)) {
             console.log('here')
@@ -126,8 +181,8 @@ export default function HomePage() {
 
         const payload = {
             "price": price,
-            "types": [],
-            "tags": []
+            "types": getCheckedTypes(state),
+            "tags": getCheckedTags(state)
         }
         let headers = new Headers();
         headers.append('Content-Type', 'application/json');
@@ -163,7 +218,7 @@ export default function HomePage() {
                     </Grid>
                     <Grid>
                         <Button className={classes.likedArticles} color="primary" variant="contained" to={'/like'} component={Link}>
-                            See Liked Articles
+                            See Saved Items
                     </Button>
                     </Grid>
                 </Grid>
@@ -240,8 +295,14 @@ export default function HomePage() {
                         Search Green gifts!
                     </Button>
                 </Grid>
-                <Grid>
-                    <Slide items={items} key={keys}></Slide>
+                <Grid container
+                    spacing={2}
+                    direction='column'
+                    justify='center'
+                    alignItems='center'>
+                    <Grid item xs={12}>
+                        <Slide items={items} key={keys}></Slide>
+                    </Grid>
                 </Grid>
             </Grid>
         </div>

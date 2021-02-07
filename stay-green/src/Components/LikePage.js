@@ -44,9 +44,31 @@ export default function LikePage() {
                 let num = json['num'];
                 let gifts = json['gifts'];
 
-                if (num > 0) {
-                    setItems(gifts)
-                }
+                setItems(gifts)
+
+            }
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
+    const likeItem = async (id, like) => {
+        const url = 'https://giftgreen.herokuapp.com/gifts/like';
+        let payload = {
+            'id': id,
+            'liked': like
+        }
+        let headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        try {
+            let response = await fetch(url, {
+                method: 'post',
+                headers: headers,
+                body: JSON.stringify(payload)
+            });
+            if (response.status === 200) {
+                console.log('liked item: ' + id)
+                getItems()
             }
         } catch (e) {
             console.log(e)
@@ -62,12 +84,12 @@ export default function LikePage() {
                     </Button>
                 </Grid>
                 <Grid item xs={6}>
-                    <h1 className={classes.navItem}>This is your liked items</h1>
+                    <h1 className={classes.navItem}>Here are your saved items!</h1>
                 </Grid>
             </Grid >
             {
                 items.map((value, index) => {
-                    return <GiftComponent key={value.id} name={value.name} image={value.Image} description={value.Description} />
+                    return <GiftComponent key={value.id} item={value} func={likeItem} />
                 })
             }
         </div >

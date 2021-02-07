@@ -22,15 +22,16 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles({
     root: {
-        maxWidth: 345,
+
     },
     media: {
-        height: 140,
+        height: 500
+
     },
 });
 
 async function likeItem(id) {
-    const url = 'https://giftgreen.herokuapp.com/like';
+    const url = 'https://giftgreen.herokuapp.com/gifts/like';
     let payload = {
         'id': id,
         'liked': true
@@ -72,10 +73,10 @@ function Project(props) {
                 </CardContent>
             </CardActionArea>
             <CardActions>
-                <Button href={props.item.Link} size="small" color="primary">
+                <Button variant="outlined" href={props.item.Link} size="small" color="primary">
                     Buy now for {props.item.Price}$
                 </Button>
-                <Button onClick={() => { likeItem(props.item.id) }} size="small" color="primary">
+                <Button variant="outlined" color='secondary' onClick={() => { likeItem(props.item.id) }} size="small">
                     Save for later!
                 </Button>
             </CardActions>
@@ -84,6 +85,8 @@ function Project(props) {
 }
 
 export default class Slide extends React.Component {
+
+
     constructor(props) {
         super(props);
 
@@ -139,7 +142,9 @@ export default class Slide extends React.Component {
 
     render() {
         return (
-            <div style={{ marginTop: "50px", color: "#494949" }}>
+            <div style={{
+                marginTop: "30px", alignItems: 'center', display: 'flex', justifyContent: 'center'
+            }}>
                 <Carousel
                     className="SecondExample"
                     autoPlay={this.state.autoPlay}

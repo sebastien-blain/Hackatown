@@ -5,20 +5,16 @@ import Typography from '@material-ui/core/Typography';
 import CardContent from '@material-ui/core/CardContent';
 import { makeStyles } from '@material-ui/core/styles';
 import CardHeader from '@material-ui/core/CardHeader';
-
+import CardActionArea from '@material-ui/core/CardActionArea';
+import CardActions from '@material-ui/core/CardActions';
+import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        display: 'flex',
+        maxWidth: 345,
     },
-    details: {
-        display: 'flex',
-        flexDirection: 'column',
-    },
-
-    cover: {
-        width: 300,
-        height: 200
+    media: {
+        height: 140,
     },
 }));
 
@@ -29,19 +25,29 @@ export default function GiftComponent(props) {
     return (
         <div>
             <Card className={classes.root}>
-                <CardMedia
-                    className={classes.cover}
-                    image={props.image}
-                    title={props.name}
-                />
-                <CardContent className={classes.content}>
-                    <Typography variant="body2" color="textSecondary" component="p">
-                        {props.description}
-                    </Typography>
-                </CardContent>
-                <CardContent className={classes.content}>
-
-                </CardContent>
+                <CardActionArea>
+                    <CardMedia
+                        className={classes.media}
+                        image={props.item.Image}
+                        title={props.item.Name}
+                    />
+                    <CardContent>
+                        <Typography gutterBottom variant="h5" component="h2">
+                            {props.item.Name}
+                        </Typography>
+                        <Typography variant="body2" color="textSecondary" component="p">
+                            {props.item.Description}
+                        </Typography>
+                    </CardContent>
+                </CardActionArea>
+                <CardActions>
+                    <Button variant="contained" href={props.item.Link} size="small" color="primary">
+                        Buy now for {props.item.Price}$
+                </Button>
+                    <Button variant="contained" color='secondary' onClick={() => props.func(props.item.id, false)} size="small">
+                        Save for later!
+                </Button>
+                </CardActions>
             </Card>
         </div>
     );

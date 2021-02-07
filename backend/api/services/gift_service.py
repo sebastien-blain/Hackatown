@@ -2,7 +2,7 @@ import uuid
 from werkzeug.security import generate_password_hash
 from api.models.gift_model import Gift
 from helpers.response import response
-
+import random
 
 class Service:
     def add_tags(self, id, tags):
@@ -11,16 +11,24 @@ class Service:
     def get_gifts(self, price, types, tags):
 
         if types == [] and tags == []:
+            print('only price')
             gifts = Gift.get_gifts_by_price(price)
         elif not types:
+            print('not types')
+
             gifts = Gift.get_gifts_by_types_null(price, tags)
         elif not tags:
+            print('not tags')
+
             gifts = Gift.get_gifts_by_tags_null(price, types)
         else:
+            print('all query')
+
             gifts = Gift.get_gifts_by_all(price, types, tags)
 
         gifts_list = [gift.to_dict() for gift in gifts]
 
+        random.shuffle(gifts_list)
         res = {'num': len(gifts_list), 'gifts': gifts_list}
         return response(200, res)
 

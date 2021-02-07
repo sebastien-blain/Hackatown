@@ -1,4 +1,4 @@
-# Hackatown
+# GiftGreen.tech
 
 ## Inspiration
 À chaque fête, Noël ou St-Valentin, la même question se présente. Que donner en cadeau à mes proches. C'est un problème récurrent qui peut en frustrer plus d'un. C'est pourquoi notre équipe a décidé d'éradiquer ce problème en construisant une plateforme interactive qui suggère des cadeaux écologiques qui plairont certainement à vos proches.

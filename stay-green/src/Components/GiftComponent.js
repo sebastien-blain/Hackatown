@@ -11,10 +11,10 @@ import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        maxWidth: 345,
+        maxWidth: 400,
     },
     media: {
-        height: 140,
+        height: 300,
     },
 }));
 

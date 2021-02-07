@@ -87,21 +87,16 @@ export default function LikePage() {
                     <h1 className={classes.navItem}>Here are your saved items!</h1>
                 </Grid>
             </Grid >
-            <Grid container alignItems="center" spacing={2}>
-                <Grid item xs={3} >
-                    <Button color="primary" to={'/'} component={Link}>
-                        <img className={classes.media} src={logo} alt="logo" />
-                    </Button>
-                </Grid>
-                <Grid item xs={6}>
-                    <h1 className={classes.navItem}>Here are your saved items!</h1>
-                </Grid>
+            <Grid style={{ marginLeft: '35px' }} container direction='row' justify='space-evenly' alignItems="center" spacing={0}>
+
+                {
+                    items.map((value, index) => {
+
+                        return <Grid item xs={3} ><GiftComponent key={value.id} item={value} func={likeItem} /> </Grid>
+                    })
+                }
             </Grid >
-            {
-                items.map((value, index) => {
-                    return <GiftComponent key={value.id} item={value} func={likeItem} />
-                })
-            }
+
         </div >
     );
 }

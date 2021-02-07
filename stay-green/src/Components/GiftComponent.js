@@ -45,7 +45,7 @@ export default function GiftComponent(props) {
                         Buy now for {props.item.Price}$
                 </Button>
                     <Button variant="contained" color='secondary' onClick={() => props.func(props.item.id, false)} size="small">
-                        Save for later!
+                        Removed from saved items
                 </Button>
                 </CardActions>
             </Card>

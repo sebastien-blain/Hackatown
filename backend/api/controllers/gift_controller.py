@@ -9,9 +9,10 @@ gift_service = GiftService()
 gift_routes = Blueprint('gifts_routes', __name__)
 
 
-@gift_routes.route('/', methods=['GET'])
+@gift_routes.route('/', methods=['POST'])
 def get_gifts():
     data = request.get_json()
+    print(data)
     return gift_service.get_gifts(data['price'], data['types'], data['tags'])
 
 

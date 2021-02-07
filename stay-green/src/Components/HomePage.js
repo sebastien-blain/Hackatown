@@ -84,8 +84,8 @@ const useStyles = makeStyles((theme) => ({
 export default function HomePage() {
     const classes = useStyles();
     const [items, setItems] = useState([]);
-    const [invalidPrice, setInvalidPrice] = useState(false);
-    const [price, setPrice] = useState()
+    const [invalidPrice, setInvalidPrice] = useState(true);
+    const [price, setPrice] = useState(0)
     const [state, setState] = React.useState({
         checkedTech: false,
         checkedClothes: false,
@@ -107,49 +107,54 @@ export default function HomePage() {
 
     const checkPrice = (value) => {
         console.log(value)
-        let patt = new RegExp("/^-?\d+$/");
+        let patt = new RegExp("^(?=.+)(?:[1-9]*|0)?(?:\.\d+)?$");
 
         if (patt.test(value)) {
+            console.log('here')
             setInvalidPrice(false);
             setPrice(value);
         } else {
+            console.log('bad here')
             setInvalidPrice(true);
-            setPrice();
+            setPrice(0);
         }
     }
 
-    const getItems = () => {
+    const getItems = async () => {
         const url = 'https://giftgreen.herokuapp.com/gifts';
+
         const payload = {
-            'price': price,
-
+            'price': 12,
+            'types': ["Fashion"],
+            'tags': ["Men"]
         }
-        // try {
-        //     let response = await fetch(url, {
-        //         method: 'get',
-        //     });
-        //     if (response.status === 200) {
-        //         let json = await response.json();
+        try {
+            let response = await fetch(url, {
+                method: 'post',
+                body: JSON.stringify(payload)
+            });
+            if (response.status === 200) {
+                let json = await response.json();
 
-        //         let num = json['num'];
-        //         let gifts = json['gifts'];
+                let num = json['num'];
+                let gifts = json['gifts'];
 
-        //         if (num > 0) {
-        //             setItems(gifts)
-        //         }
-        //     }
-        // } catch (e) {
-        //     console.log(e)
-        // }
+                if (num > 0) {
+                    setItems(gifts)
+                }
+            }
+        } catch (e) {
+            console.log(e)
+        }
     }
 
     return (
         <div>
             <Grid container direction="column">
                 <Grid container item xs={12} spacing={3} direction="row" justify="space-between">
-                    <Button color="primary" to={'/'} component={Link}>
+                    <Grid item xs={3}>
                         <img src={logo} alt="logo" />
-                    </Button>
+                    </Grid>
                     <Grid>
                         <Button className={classes.likedArticles} color="primary" variant="contained" to={'/like'} component={Link}>
                             See Liked Articles
@@ -165,7 +170,6 @@ export default function HomePage() {
                             maxWidth: 800
                         }}
                         error={invalidPrice}
-                        helperText={invalidPrice ? 'Input a number' : ''}
 
                     />
                 </Grid>
@@ -226,7 +230,7 @@ export default function HomePage() {
                     </Grid>
                 </Grid>
                 <Grid>
-                    <Button color="primary" variant="contained" onClick={getItems}>
+                    <Button color="primary" variant="contained" disabled={invalidPrice} onClick={getItems}>
                         Search Green gifts!
                     </Button>
                 </Grid>

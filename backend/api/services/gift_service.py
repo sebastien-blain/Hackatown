@@ -10,11 +10,11 @@ class Service:
 
     def get_gifts(self, price, types, tags):
 
-        if types == [] and tags == []:
+        if types is None and tags is None:
             gifts = Gift.get_gifts_by_price(price)
-        elif not types:
+        elif types is None:
             gifts = Gift.get_gifts_by_types_null(price, tags)
-        elif not tags:
+        elif tags is None:
             gifts = Gift.get_gifts_by_tags_null(price, types)
         else:
             gifts = Gift.get_gifts_by_all(price, types, tags)

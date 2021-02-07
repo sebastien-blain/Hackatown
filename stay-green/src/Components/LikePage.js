@@ -55,8 +55,8 @@ export default function LikePage() {
 
     return (
         <div className={classes.root}>
-            <Grid container justify="center" alignItems="center" className={classes.barCard} spacing={2}>
-                <Grid item xs={6}>
+            <Grid container alignItems="center" className={classes.barCard} spacing={2}>
+                <Grid item xs={3} >
                     <Button color="primary" to={'/'} component={Link}>
                         <img className={classes.media} src={logo} alt="logo" />
                     </Button>

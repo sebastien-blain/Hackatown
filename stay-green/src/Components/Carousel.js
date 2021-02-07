@@ -10,52 +10,81 @@ import {
     Paper,
     Button,
     Slider,
-    Typography
+    Typography,
+    Card
 } from '@material-ui/core'
-
+import CardActionArea from '@material-ui/core/CardActionArea';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import CardMedia from '@material-ui/core/CardMedia';
 import "./Carousel.scss"
+import { makeStyles } from '@material-ui/core/styles';
 
-function Project(props) {
-    return (
-        <Paper
-            className="Project"
-            style={{
-                backgroundColor: props.item.color,
-            }}
-            elevation={10}
-        >
-            <h2>{props.item.name}</h2>
-            <p>{props.item.description}</p>
-        </Paper>
-    )
+const useStyles = makeStyles({
+    root: {
+        maxWidth: 345,
+    },
+    media: {
+        height: 140,
+    },
+});
+
+async function likeItem(id) {
+    const url = 'https://giftgreen.herokuapp.com/like';
+    let payload = {
+        'id': id,
+        'liked': true
+    }
+    try {
+        let response = await fetch(url, {
+            method: 'post',
+            body: JSON.stringify(payload)
+        });
+        if (response.status === 200) {
+            console.log('liked item: ' + id)
+        }
+    } catch (e) {
+        console.log(e)
+    }
 }
 
-const items = [
-    {
-        name: "Lear Music Reader",
-        description: "A PDF Reader specially designed for musicians.",
-        color: "#64ACC8"
-    },
-    {
-        name: "Hash Code 2019",
-        description: "My Solution on the 2019 Hash Code by Google Slideshow problem.",
-        color: "#7D85B1"
-    },
-    {
-        name: "Terrio",
-        description: "A exciting mobile game game made in the Unity Engine.",
-        color: "#CE7E78"
-    },
-    {
-        name: "React Carousel",
-        description: "A Generic carousel UI component for React using material ui.",
-        color: "#C9A27E"
-    }
-]
+function Project(props) {
+    const classes = useStyles();
+
+    return (
+        <Card className={classes.root}>
+            <CardActionArea>
+                <CardMedia
+                    className={classes.media}
+                    image={props.item.Image}
+                    title={props.item.Name}
+                />
+                <CardContent>
+                    <Typography gutterBottom variant="h5" component="h2">
+                        {props.item.Name}
+                    </Typography>
+                    <Typography variant="body2" color="textSecondary" component="p">
+                        {props.item.Description}
+                    </Typography>
+                </CardContent>
+            </CardActionArea>
+            <CardActions>
+                <Button href={props.item.Link} size="small" color="primary">
+                    Buy now for {props.item.Price}$
+                </Button>
+                <Button onClick={likeItem(props.item.id)} size="small" color="primary">
+                    Save for later!
+                </Button>
+            </CardActions>
+        </Card>
+    )
+}
 
 export default class Slide extends React.Component {
     constructor(props) {
         super(props);
+
+        this.items = props.items;
 
         this.state = {
             autoPlay: false,
@@ -119,7 +148,7 @@ export default class Slide extends React.Component {
 
                 >
                     {
-                        items.map((item, index) => {
+                        this.items.map((item, index) => {
                             return <Project item={item} key={index} />
                         })
                     }

@@ -1,10 +1,14 @@
 import './App.css'
 import React from 'react';
 import RouterPage from './Components/Router';
+import './App.css';
+
 
 function App() {
   return (
-    <RouterPage />
+    <div className="App">
+      <RouterPage />
+    </div>
   );
 }
 

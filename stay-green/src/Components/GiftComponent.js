@@ -39,6 +39,9 @@ export default function GiftComponent(props) {
                         {props.description}
                     </Typography>
                 </CardContent>
+                <CardContent className={classes.content}>
+
+                </CardContent>
             </Card>
         </div>
     );

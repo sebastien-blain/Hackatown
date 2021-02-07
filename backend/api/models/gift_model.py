@@ -22,7 +22,7 @@ class Gift(DynamicDocument):
 
     @staticmethod
     def get_gifts_by_all(max_price, types, tags):
-        gifts = Gift.objects(Price__lte=max_price, Type__in=types)
+        gifts = Gift.objects(Price__lte=max_price, Type__in=types, tags__in=tags)
         return gifts
 
     @staticmethod

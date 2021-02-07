@@ -87,19 +87,19 @@ export default function HomePage() {
     const [invalidPrice, setInvalidPrice] = useState(true);
     const [price, setPrice] = useState(0);
     const [keys, setKeys] = useState(true);
-    const [state, setState] = React.useState({
-        Tech: false,
-        Clothes: false,
-        Care: false,
-        Household: false,
-        Toy: false,
-        Other: false,
-        Mom: false,
-        Dad: false,
-        Girlfriend: false,
-        Boyfriend: false,
-        Friend: false,
-        Sibling: false
+    const [state, setState] = useState({
+        checkedTech: false,
+        checkedClothes: false,
+        checkedCare: false,
+        checkedHousehold: false,
+        checkedToy: false,
+        checkedOther: false,
+        checkedMom: false,
+        checkedDad: false,
+        checkedGirlfriend: false,
+        checkedBoyfriend: false,
+        checkedFriend: false,
+        checkedSibling: false
     });
 
     const handleChange = (event) => {
@@ -108,22 +108,22 @@ export default function HomePage() {
 
     const getCheckedTypes = (state) => {
         let eventList = [];
-        if (state.Tech) {
+        if (state.checkedTech) {
             eventList.push('Tech');
         }
-        if (state.Clothes) {
+        if (state.checkedClothes) {
             eventList.push('Clothes');
         }
-        if (state.Care) {
+        if (state.checkedCare) {
             eventList.push('Care');
         }
-        if (state.Household) {
+        if (state.checkedHousehold) {
             eventList.push('Household');
         }
-        if (state.Toy) {
+        if (state.checkedToy) {
             eventList.push('Toy');
         }
-        if (state.Other) {
+        if (state.checkedOther) {
             eventList.push('Other');
         }
         console.log(eventList);
@@ -134,23 +134,23 @@ export default function HomePage() {
     const getCheckedTags = (state) => {
         let eventList = [];
 
-        if (state.Mom) {
+        if (state.checkedMom) {
             eventList.push('Women');
             eventList.push('Kids');
             eventList.push('Babies');
         }
-        if (state.Dad) {
+        if (state.checkedDad) {
             eventList.push('Men');
             eventList.push('Kids');
             eventList.push('Babies');
         }
-        if (state.Girlfriend) {
+        if (state.checkedGirlfriend) {
             eventList.push('Women');
         }
-        if (state.Boyfriend) {
+        if (state.checkedBoyfriend) {
             eventList.push('Men');
         }
-        if (state.Friend) {
+        if (state.checkedFriend) {
             eventList.push('Women');
             eventList.push('Men');
             eventList.push('Teens');

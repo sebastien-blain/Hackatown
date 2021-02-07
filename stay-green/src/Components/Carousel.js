@@ -35,9 +35,12 @@ async function likeItem(id) {
         'id': id,
         'liked': true
     }
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
     try {
         let response = await fetch(url, {
             method: 'post',
+            headers: headers,
             body: JSON.stringify(payload)
         });
         if (response.status === 200) {
@@ -72,7 +75,7 @@ function Project(props) {
                 <Button href={props.item.Link} size="small" color="primary">
                     Buy now for {props.item.Price}$
                 </Button>
-                <Button onClick={likeItem(props.item.id)} size="small" color="primary">
+                <Button onClick={() => { likeItem(props.item.id) }} size="small" color="primary">
                     Save for later!
                 </Button>
             </CardActions>

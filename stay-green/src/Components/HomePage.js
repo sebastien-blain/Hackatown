@@ -85,7 +85,8 @@ export default function HomePage() {
     const classes = useStyles();
     const [items, setItems] = useState([]);
     const [invalidPrice, setInvalidPrice] = useState(true);
-    const [price, setPrice] = useState(0)
+    const [price, setPrice] = useState(0);
+    const [keys, setKeys] = useState(true);
     const [state, setState] = React.useState({
         checkedTech: false,
         checkedClothes: false,
@@ -124,13 +125,16 @@ export default function HomePage() {
         const url = 'https://giftgreen.herokuapp.com/gifts';
 
         const payload = {
-            'price': 12,
-            'types': ["Fashion"],
-            'tags': ["Men"]
+            "price": price,
+            "types": [],
+            "tags": []
         }
+        let headers = new Headers();
+        headers.append('Content-Type', 'application/json');
         try {
             let response = await fetch(url, {
                 method: 'post',
+                headers: headers,
                 body: JSON.stringify(payload)
             });
             if (response.status === 200) {
@@ -140,7 +144,9 @@ export default function HomePage() {
                 let gifts = json['gifts'];
 
                 if (num > 0) {
-                    setItems(gifts)
+                    console.log('set the items');
+                    setItems(gifts);
+                    setKeys(!keys);
                 }
             }
         } catch (e) {
@@ -234,8 +240,10 @@ export default function HomePage() {
                         Search Green gifts!
                     </Button>
                 </Grid>
+                <Grid>
+                    <Slide items={items} key={keys}></Slide>
+                </Grid>
             </Grid>
-            <Slide items={items}></Slide>
         </div>
     );
 }
